@@ -17,12 +17,12 @@ $ tar xvf julia-1.8.2-linux-x86_64.tar.gz
 and finally update your path:
 ```
 $ export PATH="$PWD/julia-1.8.2/bin:$PATH"
-``
+```
 > **Note**
-> To make the installation persision simply add the previous command
+> To make the installation persitent simply add the previous command
 > to your `~/.bashrc` file.
 
-That's it ! Now you should be able to start a sessions:
+That's it ! Now you should be able to start a session:
 ```
 $ julia
                _
@@ -36,3 +36,51 @@ $ julia
 
 julia>
 ```
+
+## Julia REPL
+Julia provides a interactive command-line (REPL for "read-eval-print-loop") which is started by typing `julia`. 
+The REPL has 3 running mode: 
+* `julia` mode (default) which allow to run julia statement
+* `pkg` (accessible by typing `]`) to manage dependencies
+* `shell` (accessible by typing `;`) to issue standard shell commands.
+
+## Managing dependencies
+To install a new package, say [LogExpFunctions](https://github.com/JuliaStats/LogExpFunctions.jl) open the julia 
+REPL, enter the `pkg` mode and type:
+```
+pkg> add LogExpFunctions 
+```
+You can check the packages you have installed by typing:
+```
+pkg> status 
+[2ab3a3ac] LogExpFunctions v0.3.18
+```
+To remove a package type:
+```
+pkg> rm LogExpFunctions
+```
+> **Note**
+> The environment variable `JULIA_DEPOT_PATH` controls where will be installed the julia packages. See [https://docs.julialang.org/en/v1/manual/environment-variables]() for the list of environment variables used by julia.
+
+## Virtual environments
+
+Julia has built in tools to create manage Virtual Environments (VE). Each VE is associated to a directory so the first step is to create a new folder:
+```
+$ mkdir myproject
+$ cd myproject
+```
+Inside `myproject` directory open a julia REPL and in `pkg` mode type:
+```
+pkg> activate .
+```
+> **Note**
+> Actually, it is not necessary to be in the directory to use the VE, instead you can activate any path you want:
+> ```
+> pkg> activate /path/to/my/virtual/env
+> ```
+
+You can the add and remove your dependencies using the `add` and `rm` command as usual.
+
+## Creating a package 
+
+See: [https://pkgdocs.julialang.org/v1/creating-packages/]()
